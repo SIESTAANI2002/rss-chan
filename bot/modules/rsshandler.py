@@ -188,7 +188,6 @@ def init_feeds():
     postgres.rss_load()
     LOGGER.info('Initiated feeds.')
 
-
 # monitors new feed items and dumps them to a telegram chat
 def rss_monitor(context):
     for name, feed_items in rss_dict.items():
@@ -204,15 +203,6 @@ def rss_monitor(context):
                     feed_count += 1
                 for feed in feed_list:
                     context.bot.send_message(CHAT_ID, feed, parse_mode='html', disable_web_page_preview=True)
-                # overwrite the existing item with the latest item
-                postgres.update_items(feed_items[0], rss_d.entries[0]['link'], name, rss_d.entries[0]['title'])
-        except IndexError:
-            LOGGER.error(f"There was an error while parsing this feed: {feed_items[0]}")
-            continue
-        else:
-            LOGGER.info(f"Feed name: {name} | Latest feed item: {rss_d.entries[0]['link']}")
-    postgres.rss_load()
-    LOGGER.info('Database Updated.')
 
 
 def rss_init():
