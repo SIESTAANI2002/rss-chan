@@ -1,5 +1,5 @@
 feedparser
-python-telegram-bot
 python-dotenv
 psycopg2-binary
 markdownify
+python-telegram-bot==13.15
